@@ -103,3 +103,11 @@ Tables:
 5-verification
     => columns:
         id | verify_code |  user_id | candid_id | election_id
+
+
+
+CREAT ADMIN
+------------
+
+use this command in your project folder:
+./yii user/creat 'first_name' 'last_name' 'username' 'password' 
