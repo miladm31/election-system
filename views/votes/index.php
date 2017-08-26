@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'election_name',
             'election_id',
             'vote_at',
+            ['class' => 'yii\grid\ActionColumn'],
 
 
         ],

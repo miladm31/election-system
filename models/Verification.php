@@ -4,6 +4,8 @@ namespace app\models;
 require  __DIR__.'/../vendor/autoload.php';
 
 use Yii;
+use app\controllers\CandidatesController;
+use Kavenegar\Exceptions\ApiException;
 
 /**
  * This is the model class for table "verification".
@@ -90,12 +92,24 @@ class Verification extends \yii\db\ActiveRecord
 
     public function sendCode($verify_code,$user_id)
     {
-      $sender = "100065995";
-      $receptor = (string)$user_id;
-      $message = "your verify code is :".$verify_code;
-      $api = new \Kavenegar\KavenegarApi("326D5A634D79327179453445566C4874773435356F413D3D");
-      $api->Send($sender,$receptor,$message);
+      try{
+        $sender = "100065995";
+        $receptor = (string)$user_id;
+        $message = "your verify code is :".$verify_code;
+        $api = new \Kavenegar\KavenegarApi("326D5A634D79327179453445566C4874773435356F413D3D");
+        $api->Send($sender,$receptor,$message);
       }
+      catch(ApiException $ex)
+      {
+        $error = $ex->errorMessage();
+        $error = explode(":" , $error);
+      	return $error[1];
+      }
+      catch(HttpException $ex)
+      {
+      	echo $e->errorMessage();
+      }
+    }
 
 
     public function votExist($user_id ,$candid_id , $election_id)

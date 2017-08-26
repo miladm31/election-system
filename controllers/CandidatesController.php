@@ -224,14 +224,21 @@ class CandidatesController extends Controller
           {
             $verification= $verification->newVerify($user_id ,$candid_id , $election_id);
             $verify_code = $verification->verify_code;
-            $verification->sendCode($verify_code,$user_id);
+            $error = $verification->sendCode($verify_code,$user_id);
+
           }else{
             $verification=$verification->votExist($user_id ,$candid_id , $election_id);
             $verify_code = $verification->verify_code;
-            $verification->sendCode($verify_code,$user_id);
+            $error = $verification->sendCode($verify_code,$user_id);
+
           }
 
-
+          if ($error)
+          {
+            return $this->render('notvalid',[
+              'error' => $error,
+            ]);
+          }
           $model = new Verification();
           return $this->render('verify',[
             'user_id' => $user_id,

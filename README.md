@@ -92,9 +92,7 @@ Tables:
 3-candidates
     => columns:
         id | first_name |  last_name | election_id | rate
-    => Foreign-Key:
-        local column :: election_id
-        referenced column :: (elections table) id
+
 
 4-votes
     => columns:
@@ -110,4 +108,4 @@ CREAT ADMIN
 ------------
 
 use this command in your project folder:
-./yii user/creat 'first_name' 'last_name' 'username' 'password' 
+./yii user/creat 'first_name' 'last_name' 'username' 'password'
